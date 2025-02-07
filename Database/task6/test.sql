@@ -1,0 +1,1 @@
+SELECT calculate_total_reward(1000, 10) AS total_reward FROM dual;
