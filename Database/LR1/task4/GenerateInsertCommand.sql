@@ -10,9 +10,7 @@ BEGIN
     WHERE id = p_id;
     -- Формируем команду INSERT
     v_sql := 'INSERT INTO MyTable (id, val) VALUES (' || v_id || ', ' || v_val || ');';
-    -- Выводим команду в консоль
     DBMS_OUTPUT.PUT_LINE(v_sql);
-    -- Возвращаем команду (опционально)
     RETURN v_sql;
 EXCEPTION
     WHEN NO_DATA_FOUND THEN
