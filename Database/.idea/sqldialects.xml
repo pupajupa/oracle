@@ -2,8 +2,5 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/LR2/task1/tables/Create Groups.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/LR2/task2/test.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/LR2/task2/triggers/GroupsInsertTrigger.sql" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/LR2/task3/test.sql" dialect="OracleSqlPlus" />
   </component>
 </project>
