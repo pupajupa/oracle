@@ -29,12 +29,12 @@ BEGIN
             WHERE ROWNUM = 1;
             EXCEPTION
                 WHEN NO_DATA_FOUND THEN
-                    v_group_name := NULL;
+                    v_group_name := NULL; 
             END;
         END IF;
     EXCEPTION
         WHEN NO_DATA_FOUND THEN
-            v_group_name := NULL;
+            v_group_name := NULL; 
     END;
 
     IF INSERTING THEN

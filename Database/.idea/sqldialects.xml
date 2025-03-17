@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/LR1/task6/test.sql" dialect="OracleSqlPlus" />
     <file url="file://$PROJECT_DIR$/LR2/task1/tables/Create Groups.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/LR2/task2/triggers/GroupsInsertTrigger.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/LR2/task2/triggers/StudentsInsertTrigger.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/LR2/task3/triggers/CascadeDeleteGroup.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/LR2/task4/tables/CreateStudentLog.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/LR2/task4/triggers/StudentsLoggingTrigger.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/LR2/task6/triggers/UpdateC_val.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/LR3/Procedures.sql" dialect="OracleSqlPlus" />
   </component>
 </project>
