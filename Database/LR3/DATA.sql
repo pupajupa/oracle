@@ -91,3 +91,10 @@ ADD CONSTRAINT fk_team FOREIGN KEY (team_id) REFERENCES teams(team_id);
 
 ALTER TABLE teams
 ADD CONSTRAINT fk_lead FOREIGN KEY (lead_id) REFERENCES team_leads(lead_id);
+
+SET SERVEROUTPUT ON SIZE UNLIMITED;
+
+ALTER SESSION SET CURRENT_SCHEMA = C##admin_schema;
+BEGIN
+    compare_schemes('C##DEV_SCHEMA', 'C##PROD_SCHEMA');
+END;
