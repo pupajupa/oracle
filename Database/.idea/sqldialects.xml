@@ -10,5 +10,6 @@
     <file url="file://$PROJECT_DIR$/LR2/task4/triggers/StudentsLoggingTrigger.sql" dialect="OracleSqlPlus" />
     <file url="file://$PROJECT_DIR$/LR2/task6/triggers/UpdateC_val.sql" dialect="OracleSqlPlus" />
     <file url="file://$PROJECT_DIR$/LR3/Procedures.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/LR4/Lab4.sql" dialect="OracleSqlPlus" />
   </component>
 </project>

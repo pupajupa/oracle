@@ -1,151 +1,77 @@
-CREATE USER C##admin_schema IDENTIFIED BY admin_password;
-GRANT CONNECT, RESOURCE TO C##admin_schema;
-GRANT SELECT ANY DICTIONARY TO C##admin_schema;
-GRANT ALL PRIVILEGES TO C##ADMIN_SCHEMA;
-SET SERVEROUTPUT ON;
-
-
+--запуск сравнения схем
 ALTER SESSION SET CURRENT_SCHEMA = C##admin_schema;
+BEGIN
+    compare_schemes('C##SCHEMA_1', 'C##SCHEMA_2');
+END;
+----------------------
 
+-- создание двух схем и выдача им прав
+CREATE USER C##schema_1 IDENTIFIED BY schema1_password;
+CREATE USER C##schema_2 IDENTIFIED BY schema2_password;
+GRANT CONNECT, RESOURCE TO C##schema_1, C##schema_2;
+----------------------------
 
-
-CREATE USER C##dev_schema IDENTIFIED BY dev_password;
-CREATE USER C##prod_schema IDENTIFIED BY prod_password;
-GRANT CONNECT, RESOURCE TO C##dev_schema, C##prod_schema;
-
-
-ALTER SESSION SET CURRENT_SCHEMA = C##dev_schema;
-
-CREATE TABLE dev_table1 (
+---создание таблицы в схеме new_schema1
+ALTER SESSION SET CURRENT_SCHEMA = C##schema_1;
+CREATE TABLE schema1_table1 (
     id NUMBER,
     name VARCHAR2(100)
 );
-CREATE TABLE dev_table2 (
-    id NUMBER,
-    description VARCHAR2(200)
-);
-CREATE TABLE common_table (
+---------------------------------------
+
+---создание той же таблицы но с новым полем description в схеме new_schema2
+ALTER SESSION SET CURRENT_SCHEMA = C##schema_2;
+CREATE TABLE schema1_table1 (
     id NUMBER,
     name VARCHAR2(100),
-    age NUMBER
+    description VARCHAR(100)
 );
+------------------------------------------------
 
+--- создание функции в new_schema1
+ALTER SESSION SET CURRENT_SCHEMA = C#schema_1;
 CREATE OR REPLACE PROCEDURE hello_world IS
 BEGIN
-    DBMS_OUTPUT.PUT_LINE('Привет, мир!');
+    DBMS_OUTPUT.PUT_LINE('Привет мир');
 END hello_world;
+----------------------------------
 
-ALTER SESSION SET CURRENT_SCHEMA = C##dev_schema;
-
--- Индекс для таблицы DEV_TABLE1
-CREATE INDEX idx_dev_table1_name ON dev_table1(name);
-
--- Уникальный индекс для таблицы DEPARTMENTS
-CREATE UNIQUE INDEX idx_departments_name ON departments(department_name);
-
-ALTER SESSION SET CURRENT_SCHEMA = C##prod_schema;
-
-CREATE TABLE prod_table1 (
-    id NUMBER,
-    name VARCHAR2(100)
-);
-CREATE TABLE prod_table3 (
-    id NUMBER,
-    details VARCHAR2(200)
-);
-CREATE TABLE common_table (
-    id NUMBER,
-    name VARCHAR2(100),
-    email VARCHAR2(100)
-);
-
-ALTER SESSION SET CURRENT_SCHEMA = C##prod_schema;
-
--- Индекс для таблицы PROD_TABLE1
-CREATE INDEX idx_prod_table1_name ON prod_table1(name);
-
--- Составной индекс для таблицы COMMON_TABLE
-CREATE INDEX idx_common_table_name_email ON common_table(name, email);
-
-ALTER SESSION SET CURRENT_SCHEMA = C##dev_schema;
-
-CREATE TABLE departments (
-    department_id NUMBER PRIMARY KEY,
-    department_name VARCHAR2(100) NOT NULL
-);
-
-CREATE TABLE employees (
-    employee_id NUMBER PRIMARY KEY,
-    employee_name VARCHAR2(100) NOT NULL,
-    department_id NUMBER,
-    CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES departments(department_id)
-);
-
-CREATE TABLE projects (
-    project_id NUMBER PRIMARY KEY,
-    project_name VARCHAR2(100) NOT NULL,
-    employee_id NUMBER,
-    CONSTRAINT fk_employee FOREIGN KEY (employee_id) REFERENCES employees(employee_id)
-);
-
-CREATE TABLE team_leads (
-    lead_id NUMBER PRIMARY KEY,
-    lead_name VARCHAR2(100) NOT NULL,
-    team_id NUMBER
-);
-
-CREATE TABLE teams (
-    team_id NUMBER PRIMARY KEY,
-    team_name VARCHAR2(100) NOT NULL,
-    lead_id NUMBER
-);
-
-ALTER TABLE team_leads
-ADD CONSTRAINT fk_team FOREIGN KEY (team_id) REFERENCES teams(team_id);
-
-ALTER TABLE teams
-ADD CONSTRAINT fk_lead FOREIGN KEY (lead_id) REFERENCES team_leads(lead_id);
-
-ALTER SESSION SET CURRENT_SCHEMA = C##dev_schema;
-
-CREATE OR REPLACE PACKAGE pkg_example IS
-    PROCEDURE calculate_bonus(emp_id NUMBER);
-    FUNCTION get_employee_count RETURN NUMBER;
-END pkg_example;
-
-CREATE OR REPLACE PACKAGE BODY pkg_example IS
-    PROCEDURE calculate_bonus(emp_id NUMBER) IS
-    BEGIN
-        DBMS_OUTPUT.PUT_LINE('Бонус для сотрудника ' || emp_id);
-    END;
-
-    FUNCTION get_employee_count RETURN NUMBER IS
-        v_count NUMBER;
-    BEGIN
-        SELECT COUNT(*) INTO v_count FROM employees;
-        RETURN v_count;
-    END;
-END pkg_example;
-
-
-ALTER SESSION SET CURRENT_SCHEMA = C##prod_schema;
-
-CREATE OR REPLACE PACKAGE pkg_example IS
-    PROCEDURE calculate_bonus(emp_id NUMBER);
-    -- В PROD-схеме функция get_employee_count отсутствует
-END pkg_example;
-
-CREATE OR REPLACE PACKAGE BODY pkg_example IS
-    PROCEDURE calculate_bonus(emp_id NUMBER) IS
-    BEGIN
-        DBMS_OUTPUT.PUT_LINE('Бонус для сотрудника ' || emp_id || ' (PROD)');
-    END;
-END pkg_example;
-
-SET SERVEROUTPUT ON SIZE UNLIMITED;
-
-ALTER SESSION SET CURRENT_SCHEMA = C##admin_schema;
+--- создание функции в new_schema2
+ALTER SESSION SET CURRENT_SCHEMA = C##schema_2;
+CREATE OR REPLACE PROCEDURE hello_world IS
 BEGIN
-    compare_schemes('C##DEV_SCHEMA', 'C##PROD_SCHEMA');
-END;
+    DBMS_OUTPUT.PUT_LINE('Привет');
+END hello_world;
+;
+
+-- t2->t3->t1
+ALTER SESSION SET CURRENT_SCHEMA = C##schema_1;
+CREATE TABLE t1 (
+    t1_id NUMBER PRIMARY KEY,
+    val int  NOT NULL
+);
+
+CREATE TABLE t2 (
+    t2_id NUMBER PRIMARY KEY,
+    val  int NOT NULL
+);
+
+CREATE TABLE t3 (
+    t3_id NUMBER PRIMARY KEY,
+    val int NOT NULL
+);
+
+ALTER TABLE t1
+ADD CONSTRAINT fk_t FOREIGN KEY (t1_id) REFERENCES t3(t3_id);
+
+ALTER TABLE t3
+ADD CONSTRAINT fk_table FOREIGN KEY (t3_id) REFERENCES t2(t2_id);
+---------------------------------------
+
+
+--циклическая зависимость
+ALTER SESSION SET CURRENT_SCHEMA = C##schema_1;
+ALTER TABLE t3
+ADD CONSTRAINT fk_t1 FOREIGN KEY (t3_id) REFERENCES t1(t1_id);
+-----------------------------------------------------------
 
