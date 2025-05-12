@@ -11,5 +11,12 @@
     <file url="file://$PROJECT_DIR$/LR2/task6/triggers/UpdateC_val.sql" dialect="OracleSqlPlus" />
     <file url="file://$PROJECT_DIR$/LR3/Procedures.sql" dialect="OracleSqlPlus" />
     <file url="file://$PROJECT_DIR$/LR4/Lab4.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/LR4/Lab4_Data.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/LR4/TESTS.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/LR5/Clean data.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/LR5/LR5 pavel.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/LR5/LR5.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/LR5/Test.sql" dialect="OracleSqlPlus" />
+    <file url="file://$PROJECT_DIR$/LR5/test pavel.sql" dialect="OracleSqlPlus" />
   </component>
 </project>

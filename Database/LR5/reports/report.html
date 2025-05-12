@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Отчет об изменениях БД #9</title>
+</head>
+<body>
+  <div class="header">
+    <div class="container">
+      <h3 class="report-title">Отчет об изменениях базы данных</h3>
+      <div class="report-info">
+        <div>
+          <div class="timestamp">Отчёт сгенерирован: 2025-05-12 19:21:48</div>
+          <div class="timestamp">Период: 2025-05-12 19:20:44 — 2025-05-12 19:21:48</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="card">
+      <h3 class="section-title">Сводка изменений</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Таблица</th>
+            <th>Добавлено</th>
+            <th>Изменено</th>
+            <th>Удалено</th>
+            <th>Всего</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Клиенты</td>
+            <td><span class="badge insert-badge">+1</span></td>
+            <td><span class="badge update-badge">~1</span></td>
+            <td><span class="badge delete-badge">-1</span></td>
+            <td>3</td>
+          </tr>
+          <tr class="total-row">
+            <td>Итого</td>
+            <td><span class="badge insert-badge">+1</span></td>
+            <td><span class="badge update-badge">~1</span></td>
+            <td><span class="badge delete-badge">-1</span></td>
+            <td>3</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h3 class="section-title">Изменения клиентов</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Время</th>
+            <th>Операция</th>
+            <th>ID</th>
+            <th>Имя</th>
+            <th>Предыдущее имя</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="timestamp">2025-05-12 19:21:44</td>
+            <td><span class="badge insert-badge">INSERT</span></td>
+            <td>3</td>
+            <td>Павел</td>
+            <td><span class="null-value">N/A</span></td>
+          </tr>
+          <tr>
+            <td class="timestamp">2025-05-12 19:21:45</td>
+            <td><span class="badge update-badge">UPDATE</span></td>
+            <td>1</td>
+            <td>Вася</td>
+            <td>Павел Шукайло</td>
+          </tr>
+          <tr>
+            <td class="timestamp">2025-05-12 19:21:46</td>
+            <td><span class="badge delete-badge">DELETE</span></td>
+            <td>1</td>
+            <td><span class="null-value">N/A</span></td>
+            <td>Вася</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
